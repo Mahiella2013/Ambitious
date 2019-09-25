@@ -48,7 +48,7 @@ Deploying Lambda function through serverless framework:
  api keys:\
     None\
  endpoints:\
-    GET - https://rqu9hxmt98.execute-api.us-east-1.amazonaws.com/dev/hello    \<-- Ignore the backslash in the url\
+    GET - https://rqu9hxmt98.execute-api.us-east-1.amazonaws.com/dev/hello    \\\
  functions:\
     helloWorld: serverlesscli2-dev-helloWorld\
  layers:\
