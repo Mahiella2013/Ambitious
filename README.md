@@ -21,38 +21,36 @@ Deploying Lambda function through serverless framework:
 2. Create an aws config file using the command "sls configcredentials --provider aws --key {} --secret {}"
 3. Using a serverless command "sls create --template aws-nodejs" create a service from the available templates. I used "aws-nodejs" template.
 4. Using visual Studio code, handler.js was created with the Lambda function "helloWorld" and the deployment configuration was set up in serverless.yml file,which provisions resources like S3,API-gateway and deploys Lambdafunction through a cloud formation template and stores all the details in the S3.
-5. On completing the above set up, tested the function on my local machine via CLI using the command "sls invoke local --function helloWorld", which provided the below output
-{
-    "statusCode": 200,
-    "body": "Hello World on 24/9/2019 @ 21:5:18 !!"
-}
-hi-------> { Bucket: 'my-pppractice-bucket',
-  Key: 'Hello5.Txt',
-  Body: 'Hello World on 24/9/2019 @ 21:5:18 !!' }
-Successfully saved object to my-pppractice-bucket/Hello5.Txt
-6. As the outcome was expected, I started to deploy the function in AWS console using the command "sls deploy", which provisioned the necessary resources in my AWS account with the following output
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service serverlesscli2.zip file to S3 (665 B)...
-Serverless: Validating template...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-..............
-Serverless: Stack update finished...
-Service Information
-service: serverlesscli2
-stage: dev
-region: us-east-1
-stack: serverlesscli2-dev
-resources: 9
-api keys:
-  None
-endpoints:
-  GET - https://rqu9hxmt98.execute-api.us-east-1.amazonaws.com/dev/hello
-functions:
-  helloWorld: serverlesscli2-dev-helloWorld
-layers:
-  None
-Serverless: Run the "serverless" command to setup monitoring, troubleshooting and testing.
+5. On completing the above set up, tested the function on my local machine via CLI using the command "sls invoke local --function helloWorld", which provided the below output\
+{\
+    "statusCode": 200,\
+    "body": "Hello World on 24/9/2019 @ 21:5:18 !!"\
+ }\
+ hi-------> { Bucket: 'my-pppractice-bucket',Key: 'Hello5.Txt',Body: 'Hello World on 24/9/2019 @ 21:5:18 !!' }\
+ Successfully saved object to my-pppractice-bucket/Hello5.Txt\
+6. As the outcome was expected, I started to deploy the function in AWS console using the command "sls deploy", which provisioned the necessary resources in my AWS account with the following output\
+ Serverless: Packaging service...\
+ Serverless: Excluding development dependencies...\
+ Serverless: Uploading CloudFormation file to S3...\
+ Serverless: Uploading artifacts...\
+ Serverless: Uploading service serverlesscli2.zip file to S3 (665 B)...\
+ Serverless: Validating template...\
+ Serverless: Updating Stack...\
+ Serverless: Checking Stack update progress...\
+ ..............\
+ Serverless: Stack update finished...\
+ Service Information\
+ service: serverlesscli2\
+ stage: dev\
+ region: us-east-1\
+ stack: serverlesscli2-dev\
+ resources: 9\
+ api keys:\
+    None\
+ endpoints:\
+    GET - https://rqu9hxmt98.execute-api.us-east-1.amazonaws.com/dev/hello\
+ functions:\
+    helloWorld: serverlesscli2-dev-helloWorld\
+ layers:\
+    None\
+ Serverless: Run the "serverless" command to setup monitoring, troubleshooting and testing.
