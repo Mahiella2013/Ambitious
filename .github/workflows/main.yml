@@ -2,7 +2,7 @@ name: POC_ToRunJmeterTest
 on:
   workflow_dispatch:
 
-Jobs:
+jobs:
  JmeterTest:
    runs-on: ubuntu-latest
 
