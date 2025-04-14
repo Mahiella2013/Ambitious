@@ -21,8 +21,11 @@ jobs:
           export PATH=$PATH:$(pwd)/apache-jmeter-5.5/bin
 
       # Step 2.1: Verify Jmeter Installation
+      - name: Check PATH
+        run: echo $PATH
+        
       - name: Check JMeter Installation
-        run: jmeter -v
+        run: ./apache-jmeter-5.5/bin/jmeter -v
 
       # Step 2.2: Verify the script path
       - name: List files
