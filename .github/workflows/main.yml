@@ -27,13 +27,30 @@ jobs:
       - name: Check JMeter Installation
         run: jmeter -v
 
-      # Step 2.2: Verify the script path
+      # Step 2.2: Verify the JMeter path
       - name: List files
         run: ls -R apache-jmeter-5.5
 
       # Step 2.3: Verify the working Directory
       - name: working directory
         run: pwd
+
+      # Step 2.4: Install JMeter Plugins Manager
+      - name: Install JMeter Plugins Manager
+        run: |
+          wget https://jmeter-plugins.org/get/
+          cp get apache-jmeter-5.5/lib/ext/
+
+      # Step 2.5: Install BlazeMeter Plugin
+      - name: Install BlazeMeter Plugin
+        run: |
+          ./apache-jmeter-5.5/bin/jmeter -q \
+          -p apache-jmeter-5.5/bin/user.properties \
+          --add-plugin com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup
+
+      # Step 2.6: Verify Plugins
+      - name: Verify Plugins
+        run: ./apache-jmeter-5.5/bin/jmeter --list-plugins
 
       # Step 3: Run JMeter test
       - name: Execute JMeter Test Plan
