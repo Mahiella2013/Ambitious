@@ -7,11 +7,15 @@ jobs:
    runs-on: ubuntu-latest
 
    steps:
-      # Step 1: Checkout code
+      # Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Install JMeter
+      # Step 2.3: Verify the working Directory
+      - name: working directory
+        run: pwd
+
+      # Install JMeter
       - name: Install Apache JMeter
         run: |
           sudo apt-get update
@@ -20,33 +24,34 @@ jobs:
           tar -xvzf apache-jmeter-5.5.tgz
           echo "PATH=$PATH:$(pwd)/apache-jmeter-5.5/bin" >> $GITHUB_ENV
 
-      # Step 2.1: Verify Jmeter Installation
+      # Verify Jmeter Path
       - name: Check PATH
         run: echo $PATH
-        
-      - name: Check JMeter Installation
-        run: jmeter -v
 
-      # Step 2.2: Verify the JMeter path
-      - name: List files
-        run: ls -R apache-jmeter-5.5
-
-      # Step 2.3: Verify the working Directory
-      - name: working directory
-        run: pwd
-
-      # Step 2.4: Install JMeter Plugins Manager
+      # Install JMeter Plugins Manager
       - name: Install JMeter Plugins Manager
         run: |
           wget https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/1.10/jmeter-plugins-manager-1.10.jar -O jmeter-plugins-manager.jar
           mv jmeter-plugins-manager.jar apache-jmeter-5.5/lib/ext/
 
-      # Step 2.5: Install BlazeMeter Plugin
+      # Verify Plugin Installation
+      - name: Verify Plugin Installation
+        run: ls apache-jmeter-5.5/lib/ext/jmeter-plugins-manager.jar
+
+      # Verify JMeter Installation
+      - name: Verify JMeter Installation
+        run: jmeter -v
+
+      # List Jmeter files
+      - name: List Jmeter files
+        run: ls -R
+
+      # Install BlazeMeter Plugin
       - name: Install BlazeMeter Plugin
         run:  ./apache-jmeter-5.5/bin/PluginsManagerCMD.sh install bzm-parallel
 
-      # Step 2.6: Verify Plugins
-      - name: Verify Plugins
+      # Verify PluginsManagerCMD
+      - name: Verify PluginsManagerCMD
         run: ./apache-jmeter-5.5/bin/PluginsManagerCMD.sh status
 
       # Step 3: Run JMeter test
