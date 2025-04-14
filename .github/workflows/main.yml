@@ -38,8 +38,8 @@ jobs:
       # Step 2.4: Install JMeter Plugins Manager
       - name: Install JMeter Plugins Manager
         run: |
-          wget https://jmeter-plugins.org/get/
-          cp get apache-jmeter-5.5/lib/ext/
+          wget https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/1.10/jmeter-plugins-manager-1.10.jar -O jmeter-plugins-manager.jar
+          mv jmeter-plugins-manager.jar apache-jmeter-5.5/lib/ext/
 
       # Step 2.5: Install BlazeMeter Plugin
       - name: Install BlazeMeter Plugin
