@@ -43,14 +43,11 @@ jobs:
 
       # Step 2.5: Install BlazeMeter Plugin
       - name: Install BlazeMeter Plugin
-        run: |
-          ./apache-jmeter-5.5/bin/jmeter -q \
-          -p apache-jmeter-5.5/bin/user.properties \
-          --add-plugin com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup
+        run:  ./apache-jmeter-5.5/bin/PluginsManagerCMD.sh install bzm-parallel
 
       # Step 2.6: Verify Plugins
       - name: Verify Plugins
-        run: ./apache-jmeter-5.5/bin/jmeter --list-plugins
+        run: ./apache-jmeter-5.5/bin/PluginsManagerCMD.sh status
 
       # Step 3: Run JMeter test
       - name: Execute JMeter Test Plan
