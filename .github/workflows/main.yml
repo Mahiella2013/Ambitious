@@ -28,19 +28,17 @@ jobs:
       - name: Check PATH
         run: echo $PATH
 
-      # Install JMeter Plugins Manager
       - name: Install JMeter Plugins Manager
         run: |
-          wget https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/1.10/jmeter-plugins-manager-1.10.jar -O jmeter-plugins-manager.jar
-          mv jmeter-plugins-manager.jar apache-jmeter-5.5/lib/ext/
+          wget https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/1.10/jmeter-plugins-manager-1.10.jar -O apache-jmeter-5.5/lib/ext/jmeter-plugins-manager.jar
+          ./apache-jmeter-5.5/bin/jmeter -v
+          echo '#!/bin/bash
+          java -cp "./lib/ext/jmeter-plugins-manager.jar:./lib/ext/ApacheJMeter_core.jar:./lib/jorphan.jar" org.jmeterplugins.repository.PluginManagerCMD "$@"' > apache-jmeter-5.5/bin/PluginsManagerCMD.sh
+          chmod +x apache-jmeter-5.5/bin/PluginsManagerCMD.sh
 
       # Verify Plugin Installation
       - name: Verify Plugin Installation
         run: ls apache-jmeter-5.5/lib/ext/jmeter-plugins-manager.jar
-
-      # Verify JMeter Installation
-      - name: Verify JMeter Installation
-        run: jmeter -v
 
       # List Jmeter files
       - name: List Jmeter files
