@@ -46,13 +46,15 @@ jobs:
       - name: List Jmeter files
         run: ls -R
 
+      # Verify PluginsManagerCMD
+      - name: Verify PluginsManagerCMD
+        run: |
+          ./apache-jmeter-5.5/bin/PluginsManagerCMD.sh status
+          ls apache-jmeter-5.5/bin/PluginsManagerCMD.sh
+
       # Install BlazeMeter Plugin
       - name: Install BlazeMeter Plugin
         run:  ./apache-jmeter-5.5/bin/PluginsManagerCMD.sh install bzm-parallel
-
-      # Verify PluginsManagerCMD
-      - name: Verify PluginsManagerCMD
-        run: ./apache-jmeter-5.5/bin/PluginsManagerCMD.sh status
 
       # Step 3: Run JMeter test
       - name: Execute JMeter Test Plan
