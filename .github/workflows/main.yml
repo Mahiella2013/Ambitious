@@ -15,6 +15,9 @@ jobs:
       - name: working directory
         run: pwd
 
+      - name: Verify Java Version
+        run: java -version
+
       # Install JMeter
       - name: Install Apache JMeter
         run: |
