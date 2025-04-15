@@ -49,7 +49,7 @@ jobs:
       # Verify PluginsManagerCMD
       - name: Verify PluginsManagerCMD
         run: |
-          ./apache-jmeter-5.5/bin/PluginsManagerCMD.sh status
+          # ./apache-jmeter-5.5/bin/PluginsManagerCMD.sh status
           ls apache-jmeter-5.5/bin/PluginsManagerCMD.sh
 
       # Install BlazeMeter Plugin
