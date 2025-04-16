@@ -31,6 +31,14 @@ jobs:
       - name: Pull JMeter Docker Image
         run: docker pull justb4/jmeter:latest
 
+        # Verify JMeter Installation
+      - name: Verify JMeter Installation
+        run: jmeter -v
+
+      # List Jmeter files
+      - name: List Jmeter files
+        run: ls -R
+
       - name: install bzm-concurrency
         run: |
          docker run --rm \
