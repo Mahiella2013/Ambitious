@@ -15,62 +15,30 @@ jobs:
       - name: working directory
         run: pwd
 
-      - name: Install Java 8
+      # Step 1: Print Docker Version
+      - name: Check Docker Version
+        run: docker --version
+
+      # Step 2: Verify Docker Service
+      - name: Check Docker Status
         run: |
-          sudo apt install openjdk-8-jdk
-          update-alternatives --config java
+          sudo systemctl status docker
 
       - name: Verify Java Version
         run: java -version
 
-      # Install JMeter
-      - name: Install Apache JMeter
+      # Step 2: Pull Docker Image for JMeter
+      - name: Pull JMeter Docker Image
+        run: docker pull justb4/jmeter:latest
+
+      # Step 3: Run JMeter Test
+      - name: Execute JMeter Test
         run: |
-          sudo apt-get update
-          sudo apt-get install -y openjdk-11-jdk wget
-          wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz
-          tar -xvzf apache-jmeter-5.5.tgz
-          echo "PATH=$PATH:$(pwd)/apache-jmeter-5.5/bin" >> $GITHUB_ENV
-
-      # Verify Jmeter Path
-      - name: Check PATH
-        run: echo $PATH
-
-      - name: Install JMeter Plugins Manager
-        run: |
-          wget https://repo1.maven.org/maven2/kg/apc/jmeter-plugins-manager/1.10/jmeter-plugins-manager-1.10.jar -O apache-jmeter-5.5/lib/ext/jmeter-plugins-manager.jar
-          ./apache-jmeter-5.5/bin/jmeter -v
-          echo '#!/bin/bash
-          java -cp "./lib/ext/jmeter-plugins-manager.jar:./lib/ext/ApacheJMeter_core.jar:./lib/jorphan.jar" org.jmeterplugins.repository.PluginManagerCMD "$@"' > apache-jmeter-5.5/bin/PluginsManagerCMD.sh
-          chmod +x apache-jmeter-5.5/bin/PluginsManagerCMD.sh
-
-      # Verify Plugin Installation
-      - name: Verify Plugin Installation
-        run: ls apache-jmeter-5.5/lib/ext/jmeter-plugins-manager.jar
-
-      # List Jmeter files
-      - name: List Jmeter files
-        run: ls -R
-
-      # Verify PluginsManagerCMD
-      - name: Verify PluginsManagerCMD
-        run: |
-          # ./apache-jmeter-5.5/bin/PluginsManagerCMD.sh status
-          ls apache-jmeter-5.5/bin/PluginsManagerCMD.sh
-
-      - name: Debug:Verify Classpath
-        run: echo $CLASSPATH
-
-      - name: Debug:List Classes in Plugins Manager
-        run: jar tf apache-jmeter-5.5/lib/ext/jmeter-plugins-manager.jar | grep org/jmeterplugins/repository/PluginManagerCMD
-
-      # Install BlazeMeter Plugin
-      - name: Install BlazeMeter Plugin
-        run:  ./apache-jmeter-5.5/bin/PluginsManagerCMD.sh install bzm-parallel
-
-      # Step 3: Run JMeter test
-      - name: Execute JMeter Test Plan
-        run: jmeter -n -t ./Scripts/Gol_Launch.jmx -l results.jtl
+          docker run --rm \
+          -v $(pwd):/jmeter \
+          justb4/jmeter:latest \
+          -n -t /jmeter/your-test.jmx -l /jmeter/results.jtl -e -o /jmeter/report
+          -n -t /jmeter/Scripts/Gol_Launch.jmx  -l /jmeter/results.jtl -e -o /jmeter/report
 
       # Step 4: Save results as artifact
       - name: Upload JMeter Test Results
