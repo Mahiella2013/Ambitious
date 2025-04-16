@@ -31,28 +31,6 @@ jobs:
       - name: Pull JMeter Docker Image
         run: docker pull justb4/jmeter:latest
 
-        # Verify JMeter Installation
-      - name: Verify JMeter Installation
-        run: jmeter -v
-
-      # List Jmeter files
-      - name: List Jmeter files
-        run: ls -R
-
-      - name: install bzm-concurrency
-        run: |
-         docker run --rm \
-         -v $(pwd):/jmeter \
-         justb4/jmeter:latest \
-         apache-jmeter-5.5/bin/PluginsManagerCMD.sh install bzm-concurrency
-
-      - name: Verify Plugin
-        run: |
-          docker run --rm \
-          -v $(pwd):/jmeter \
-          justb4/jmeter:latest \
-          apache-jmeter-5.5/bin/PluginsManagerCMD.sh status
-
       # Step 3: Run JMeter Test
       - name: Execute JMeter Test
         run: |
