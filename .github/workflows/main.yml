@@ -58,6 +58,12 @@ jobs:
           # ./apache-jmeter-5.5/bin/PluginsManagerCMD.sh status
           ls apache-jmeter-5.5/bin/PluginsManagerCMD.sh
 
+      - name: Debug:Verify Classpath
+        run: echo $CLASSPATH
+
+      - name: Debug:List Classes in Plugins Manager
+        run: jar tf apache-jmeter-5.5/lib/ext/jmeter-plugins-manager.jar | grep org/jmeterplugins/repository/PluginManagerCMD
+
       # Install BlazeMeter Plugin
       - name: Install BlazeMeter Plugin
         run:  ./apache-jmeter-5.5/bin/PluginsManagerCMD.sh install bzm-parallel
