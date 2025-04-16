@@ -15,6 +15,11 @@ jobs:
       - name: working directory
         run: pwd
 
+        -name: Install Java 8
+          run: |
+            sudo apt install openjdk-8-jdk
+            update-alternatives --config java
+
       - name: Verify Java Version
         run: java -version
 
