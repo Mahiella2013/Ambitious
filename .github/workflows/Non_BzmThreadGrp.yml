@@ -32,18 +32,18 @@ jobs:
         run: docker pull justb4/jmeter:latest
 
       - name: install jpgc-standard
-      run: |
-      docker run --rm \
-      -v $(pwd):/jmeter \
-      justb4/jmeter:latest \
-      apache-jmeter-5.5/bin/PluginsManagerCMD.sh install jpgc-standard
+        run: |
+          docker run --rm \
+          -v $(pwd):/jmeter \
+          justb4/jmeter:latest \
+          apache-jmeter-5.5/bin/PluginsManagerCMD.sh install jpgc-standard
 
       - name: Verify Plugin
-      run: |
-      docker run --rm \
-      -v $(pwd):/jmeter \
-      justb4/jmeter:latest \
-      apache-jmeter-5.5/bin/PluginsManagerCMD.sh status
+        run: |
+          docker run --rm \
+          -v $(pwd):/jmeter \
+          justb4/jmeter:latest \
+          apache-jmeter-5.5/bin/PluginsManagerCMD.sh status
 
       # Step 3: Run JMeter Test
       - name: Execute JMeter Test
