@@ -31,14 +31,6 @@ jobs:
       - name: Pull JMeter Docker Image
         run: docker pull justb4/jmeter:latest
 
-      # Verify JMeter Installation
-      - name: Verify JMeter Installation
-        run: jmeter -v
-
-      # List Jmeter files
-      - name: List Jmeter files
-        run: ls -R
-
       # Step 3: Run JMeter Test
       - name: Execute JMeter Test
         run: |
