@@ -31,4 +31,4 @@ jobs:
         with:
           name: jmeter-results
           path: results.jtl
-          retention-days: 7
+          retention-days: 6
